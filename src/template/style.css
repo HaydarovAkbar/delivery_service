@@ -1,0 +1,58 @@
+/* Reset some default margin and padding */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Style the sidebar */
+.sidebar {
+    background-color: #333;
+    color: #fff;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+}
+
+/* Style the main content area */
+.content {
+    margin-left: 260px;
+    padding: 20px;
+}
+
+/* Style the section headings */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Style the section content */
+section {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}

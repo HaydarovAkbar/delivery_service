@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <!--    <link rel="stylesheet" href="style.css">-->
+    <meta name="csrf-token" content="{% csrf_token %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
+    <style>
+        /* Reset some default margin and padding */
+        body, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        /* Style the sidebar */
+        .sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 250px;
+            height: 100%;
+            position: fixed;
+            overflow: auto;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #555;
+        }
+
+        /* Style the main content area */
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        /* Style the section headings */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Style the section content */
+        section {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+<nav class="sidebar">
+    <ul>
+        <li><a href="telegram-users/">Telegram Users</a></li>
+        <li><a href="telegram-admins/">Telegram Admins</a></li>
+        <li><a href="channels/">Kanallar</a></li>
+        <li><a href="advertising/">Reklama</a></li>
+    </ul>
+</nav>
+<main class="content">
+    <section id="telegram-users">
+        <h1>Botdan foydalanuvchilar bo'yicha statistika</h1>
+        <!-- Content for Telegram Users page goes here -->
+        <div>
+            <h2>Oxirgi 20ta foydalanuvchi</h2>
+            <div style="display: flex">
+                <div>
+                    <ul>
+                        {% for user in user_list %}
+                        <li>
+                            {{user.id}} - {{ user.fullname }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div style="width: 400px; margin-left:80px">
+                    <canvas id="userPieChart" style="width: 100px", height="100px"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    // Sample data (replace with your actual data)
+    var userStatistics = {
+        labels: ['Active', 'Inactive', 'Suspended'],
+        datasets: [{
+            data: [300, 150, 50],
+            backgroundColor: ['#36A2EB', '#56ff94', '#FF6384']
+        }]
+    };
+
+    // Get the canvas element
+    var userPieChartCanvas = document.getElementById('userPieChart').getContext('2d');
+
+    // Create the pie chart
+    var userPieChart = new Chart(userPieChartCanvas, {
+        type: 'pie',
+        data: userStatistics
+    });
+</script>
+</body>
+</html>
