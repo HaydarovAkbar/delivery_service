@@ -3,14 +3,6 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-LEVEL = (
-    ('1', 'first'),
-    ('2', 'second'),
-    ('3', 'third'),
-    ('4', 'fourth'),
-    ('5', 'fifth'),
-)
-
 
 class Products(models.Model):
     name_uz = models.CharField(max_length=100)

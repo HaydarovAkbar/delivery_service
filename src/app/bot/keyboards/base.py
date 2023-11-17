@@ -1,31 +1,7 @@
 from app.bot.messages.main import KeyboardText as msg_text
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
-
-
-def number(number):
-    """13000 -> 13 000"""
-    return '{:,}'.format(number).replace(',', ' ')
-
-
-def number_simvole(number):
-    """13000 -> 13 000"""
-    simvole = {
-        '1': '1️⃣',
-        '2': '2️⃣',
-        '3': '3️⃣',
-        '4': '4️⃣',
-        '5': '5️⃣',
-        '6': '6️⃣',
-        '7': '7️⃣',
-        '8': '8️⃣',
-        '9': '9️⃣',
-        '0': '0️⃣',
-    }
-    result = ''
-    for i in str(number):
-        result += simvole.get(i)
-    return result
-
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
+from gtts import lang as gtts_lang
+from .utils import *
 
 class Keyboards:
     def __init__(self):
@@ -33,25 +9,19 @@ class Keyboards:
 
     @staticmethod
     def language():
-        inline = [
-            [
-                InlineKeyboardButton(msg_text.languages['uz'], callback_data='uz'),
-                InlineKeyboardButton(msg_text.languages['ru'], callback_data='ru'),
-            ]
-        ]
-        return InlineKeyboardMarkup(inline)
-
-    @staticmethod
-    def phone_number(lang):
-        msg = msg_text.send.get(lang)
-        keyboard = [KeyboardButton(msg, request_contact=True)]
-        return ReplyKeyboardMarkup([keyboard], resize_keyboard=True)
-
-    @staticmethod
-    def location(lang):
-        msg = msg_text.send.get(lang)
-        keyboard = [KeyboardButton(msg, request_location=True)]
-        return ReplyKeyboardMarkup([keyboard], resize_keyboard=True)
+        result, cache = [], []
+        tts_langs = gtts_lang.tts_langs()
+        result.append([InlineKeyboardButton('🇺🇿 O\'zbekcha', callback_data='uz')])
+        for lang in tts_langs:
+            # print(lang, tts_langs[lang])\  #
+            if len(cache) >= 2:
+                result.append(cache)
+                cache = []
+            lang_code = language_codes.get(lang, '')
+            cache.append(InlineKeyboardButton(lang_code + ' ' + tts_langs[lang], callback_data=lang))
+        if cache:
+            result.append(cache)
+        return InlineKeyboardMarkup(result)
 
     @staticmethod
     def base(lang):
@@ -59,7 +29,7 @@ class Keyboards:
         reply_buttons = [
             [msg[0]],
             [msg[1], msg[2]],
-            [msg[3], msg[4]]
+            [msg[3]]
         ]
         return ReplyKeyboardMarkup(reply_buttons, resize_keyboard=True)
 
@@ -70,19 +40,6 @@ class Keyboards:
             [msg]
         ]
         return ReplyKeyboardMarkup(reply_buttons, resize_keyboard=True)
-
-    @staticmethod
-    def youtube_file_size(file_size: list):
-        msg = msg_text.yt_file_types
-        inline, i = [], 0
-        result_size = []
-        for size in file_size:
-            result_size.append(str(round(size / 1024 / 1024, 2)) + ' MB')
-        file_size = result_size
-        for key, value in msg.items():
-            inline.append([InlineKeyboardButton(value + ' - ' + file_size[i], callback_data=key)])
-            i += 1
-        return InlineKeyboardMarkup(inline)
 
     @staticmethod
     def channel(channels, lang):
