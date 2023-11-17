@@ -5,7 +5,7 @@ from .bot.main import bot, dispatcher
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import TGUsers, Channel, Admin, User, Order, Category, Products, ProductSize, TgUserLocations, OrderItem
+from .models import TGUsers, Channel, Admin, User, Products, ProductSize
 from django.views import View
 from django.contrib.auth.hashers import check_password
 from rest_framework_simplejwt.views import TokenObtainPairView

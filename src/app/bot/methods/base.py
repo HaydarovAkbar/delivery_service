@@ -5,8 +5,7 @@ from telegram.ext import CallbackContext
 from app.bot.messages.main import MessageText as msg_text
 from app.bot.keyboards.base import Keyboards as kb, number as num
 from app.bot.states import States as state
-from app.models import TGUsers, Caption, Channel, Admin, TgUserLocations, Category, Products, ProductSize, Order, \
-    OrderItem, SupplierPrice, _order_status_uz, _order_status_ru
+from app.models import TGUsers, Caption, Channel, Admin, Products, ProductSize
 
 
 def check_channel(update: Update, context: CallbackContext):
@@ -24,6 +23,7 @@ def check_channel(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=update.effective_user.id, text=msg_text.add_to_channel.get(user_lang),
                                  reply_markup=kb.channel(left_channel, user_lang))
         return state.check_channel
+    return start(update, context)
 
 
 def add_to_channel(update: Update, context: CallbackContext):
@@ -40,7 +40,6 @@ def add_to_channel(update: Update, context: CallbackContext):
             print(e)
 
     query.delete_message()
-    time.sleep(0.1)
     if left_channel:
         context.bot.send_message(chat_id=update.effective_user.id, text=msg_text.add_to_channel.get(user_lang),
                                  reply_markup=kb.channel(left_channel, user_lang))
@@ -50,7 +49,7 @@ def add_to_channel(update: Update, context: CallbackContext):
 
 def start(update: Update, context: CallbackContext):
     all_channel = Channel.objects.filter(status=True)
-    user_lang = update.effective_user.language_code if update.effective_user.language_code in ['uz', 'ru'] else 'ru'
+    user_lang = update.effective_user.language_code
     left_channel = []
     for channel in all_channel:
         try:
@@ -65,7 +64,7 @@ def start(update: Update, context: CallbackContext):
         return state.check_channel
     user, _ = TGUsers.objects.get_or_create(chat_id=update.effective_user.id)
     if not _:
-        if not user.language or not user.phone_number:
+        if not user.language:
             context.bot.send_message(chat_id=update.effective_user.id, text=msg_text.main.get(user_lang),
                                      parse_mode='HTML',
                                      reply_markup=kb.language())
@@ -105,4 +104,8 @@ def language(update: Update, context: CallbackContext):
     query.delete_message(timeout=1)
     context.bot.send_message(chat_id=query.message.chat_id, text=msg_text.phone_number.get(user_lang),
                              reply_markup=kb.phone_number(user_lang), parse_mode='HTML')
-    return state.contact
+    return 1
+
+
+def inline_query_handler(update:Update, context:CallbackContext):
+    print(update)
