@@ -98,35 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 HOST = 'https://akbarshox.uz'
 
-# CORS_ALLOWED_ORIGINS = [
-#     HOST,
-# ]
-#
-# CORS_ALLOWED_ORIGIN_REGEXES = [
-#     r"^https://\w+\.akbarshox\.uz",
-# ]
-#
-# CORS_ALLOW_METHODS = [
-#     'DELETE',
-#     'GET',
-#     'OPTIONS',
-#     'PATCH',
-#     'POST',
-#     'PUT',
-# ]
-#
-# CORS_ALLOW_HEADERS = [
-#     'accept',
-#     'accept-encoding',
-#     'authorization',
-#     'content-type',
-#     'dnt',
-#     'origin',
-#     'user-agent',
-#     'x-csrftoken',
-#     'x-requested-with',
-# ]
-
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 
@@ -157,7 +128,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HOST = 'https://2623-194-93-24-3.ngrok-free.app'
+HOST = 'https://3b4a-194-93-24-3.ngrok-free.app'
 USERNAME = '@bizda24_bot'
 
 
