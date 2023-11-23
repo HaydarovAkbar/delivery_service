@@ -19,6 +19,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,7 +107,6 @@ CORS_ALLOWED_ORIGINS = [
     HOST,
     'http://localhost:5000',
     'http://localhost:3000',
-    # 'http://localhost:8000',
 ]
 
 CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
@@ -118,9 +119,10 @@ TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
-LANGUAGE_CODE = 'uz'
+# LANGUAGE_CODE = 'uz'
 
 gettext = lambda s: s
+
 LANGUAGES = (
     ('uz', gettext('Uzbek')),
     ('en', gettext('English')),
@@ -131,7 +133,6 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 MODELTRANSLATION_LANGUAGES = ('uz', 'en', 'ru')
 MODELTRANSLATION_FALLBACK_LANGUAGES = ('uz', 'en', 'ru')
 TRANSLATABLE_MODEL_MODULES = ['app', ]
-# MODELTRANSLATION_ENABLE_FALLBACKS = False
 
 MODELTRANSLATION_TRANSLATION_FILES = (
     'app.translation.translate',
@@ -155,3 +156,56 @@ USERNAME = '@bizda24_bot'
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = [HOST]
+
+
+"""JAZZMIN SETTINGS"""
+JAZZMIN_SETTINGS = {
+    "site_title": "TTS Project Admins",
+    "site_header": "TTS",
+    "welcome_sign": "Welcome to TTS",
+    "search_model": "auth.User",
+    "user_avatar_diameter": 60,
+    "user_menu": [
+        {"name": "Profile", "url": "admin:auth_user_change", "icon": "user", "permissions": ["auth.change_user"]},
+        {"name": "API Docs", "url": "schema-swagger-ui", "icon": "book", "permissions": ["auth.change_user"]},
+        {"name": "Support", "url": " ", "icon": "question-circle", "permissions": ["auth.change_user"]},
+
+        {"name": "Settings", "url": "admin:core_setting_changelist", "icon": "cog",
+         "permissions": ["auth.change_user"]},
+        {"name": "Log Out", "url": "admin:logout", "icon": "sign-out-alt"},
+    ],
+    "user_menu_links": [
+        {"name": "TTS", "url": "https://TTS.uz", "icon": "link"},
+
+    ],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "core": "fas fa-cogs",
+        "HomePage": "fas fa-home",
+        "sites": "fas fa-satellite",
+    },
+
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+
+    "custom_css": None,
+    "custom_js": None,
+
+    "fieldsets": [
+        ("General Information", {"fields": ["name", "logo", "favicon"]}),
+        ("SEO Information", {"fields": ["site_title", "site_header", "welcome_sign"]}),
+        ("Menu Options", {"fields": ["related_modal_active", "show_ui_builder", "changeform_format"]}),
+        ("User Options", {"fields": ["user_avatar", "user_avatar_diameter", "user_menu"]}),
+        ("Links", {"fields": ["links"]}),
+        ("Icons", {"fields": ["icons", "default_icon_parents", "default_icon_children"]}),
+        ("Customization", {"fields": ["custom_css", "custom_js"]}),
+    ],
+    "related_modal_active": False,
+    "show_ui_builder": True,
+    "changeform_format": "horizontal_tabs",
+    'translations': ['app'],
+    'translations_auto_reload': True,
+    'navigation_expanded': True,
+}

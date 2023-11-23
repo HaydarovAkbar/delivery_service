@@ -6,9 +6,9 @@ from app.models import Products, ProductSize, TGUsers, Level
 
 @register(Products)
 class ProductsTranslationOptions(TranslationOptions):
-    fields = ('name', 'content')
+    fields = ('name', 'content', )
 
 
 @register(ProductSize)
 class ProductSizeTranslationOptions(TranslationOptions):
-    fields = ('name',)
+    fields = ('name', )
