@@ -118,6 +118,8 @@ TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 

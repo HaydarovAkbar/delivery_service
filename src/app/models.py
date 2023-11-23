@@ -5,12 +5,8 @@ from django.contrib.auth.models import User
 
 
 class Products(models.Model):
-    name_uz = models.CharField(max_length=100)
-    name_ru = models.CharField(max_length=100, null=True)
-    name_en = models.CharField(max_length=100, null=True)
-    content_uz = models.TextField()
-    content_ru = models.TextField(null=True)
-    content_en = models.TextField(null=True)
+    name = models.CharField(max_length=100)
+    content = models.TextField()
     image = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -26,9 +22,7 @@ class Products(models.Model):
 
 
 class ProductSize(models.Model):
-    name_uz = models.CharField(max_length=300)
-    name_ru = models.CharField(max_length=300, null=True)
-    name_en = models.CharField(max_length=300, null=True)
+    name = models.CharField(max_length=300)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     status = models.BooleanField(default=True)
 
