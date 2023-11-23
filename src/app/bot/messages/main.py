@@ -21,9 +21,9 @@ class MessageText:
     }
 
     base = {
-        'uz': "<code>Botdan foydalanishingiz mumkin</code>",
-        'ru': "<code>Вы можете использовать бота</code>",
-        'en': "<code>You can use the bot</code>",
+        'uz': "<b>Men sizga matn ni audio qilib beraman!!!</b>\n\n🔹 <i>Matn\n🔸Word\n🔻Pdf\n▫️Excel\n▪️PowerPoint</i>\n\n<b>Formatlarini audio ga o'girish imkoniyati mavjud</b>\n\n❗️<code>Buning uchun hisobingiz aktiv xolatda bo'lishi kerak !!!</code>",
+        'ru': "<b>Я превращу текст в аудио для вас !!!</b>\n\n🔹 <i>Текст\n🔸Word\n🔻Pdf\n▫️Excel\n▪️PowerPoint</i>\n\n<b>Возможность преобразования в аудио форматы</b>\n\n❗️<code>Для этого ваша учетная запись должна быть в активном состоянии !!!</code>",
+        'en': "<b>I will turn the text into audio for you !!!</b>\n\n🔹 <i>Text\n🔸Word\n🔻Pdf\n▫️Excel\n▪️PowerPoint</i>\n\n<b>Ability to convert to audio formats</b>\n\n❗️<code>For this, your account must be in active state !!!</code>",
     }
 
     get_link = {
@@ -36,7 +36,6 @@ class MessageText:
         'uz': "<b>Fikringizni jo'nating</b>",
         'ru': "<b>Отправьте свой комментарий</b>",
         'en': "<b>Send us your feedback</b>",
-
     }
 
     get_stats = {

@@ -10,7 +10,8 @@ from app.models import TGUsers, Caption, Channel, Admin, Products, ProductSize, 
 
 def add_to_channel(update: Update, context: CallbackContext):
     query = update.callback_query
-    user_lang = update.effective_user.language_code if update.effective_user.language_code in ['uz', 'ru', 'en'] else 'en'
+    user_lang = update.effective_user.language_code if update.effective_user.language_code in ['uz', 'ru',
+                                                                                               'en'] else 'en'
     channel = Channel.objects.filter(status=True)
     left_channel = []
     for ch in channel:
@@ -83,10 +84,19 @@ def language(update: Update, context: CallbackContext):
     user.level = Level.objects.first()
     user.save()
     query.delete_message(timeout=0.2)
-    context.bot.send_message(chat_id=query.message.chat_id, text='', parse_mode='HTML')
-    return 1
+    user_lang = user.language if user.language in ['uz', 'ru', 'en'] else 'en'
+    context.bot.send_message(chat_id=query.message.chat_id, text=msg_text.base.get(user_lang), parse_mode='HTML')
+    return state.main
 
 
-
-def base(update:Update, context:CallbackContext):
+def back(update: Update, context: CallbackContext):
     pass
+
+
+def my_profile(update: Update, context: CallbackContext):
+    user_db = TGUsers.objects.get(chat_id=update.effective_user.id)
+    user_lang = user_db.language if user_db.language in ['uz', 'ru', 'en'] else 'en'
+
+    user_info = f"""
+
+"""

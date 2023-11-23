@@ -128,7 +128,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HOST = 'https://3b4a-194-93-24-3.ngrok-free.app'
+HOST = 'https://0fd2-194-93-24-3.ngrok-free.app'
 USERNAME = '@bizda24_bot'
 
 
