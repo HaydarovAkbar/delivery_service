@@ -118,6 +118,24 @@ TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
+LANGUAGE_CODE = 'uz'
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('uz', gettext('Uzbek')),
+    ('en', gettext('English')),
+    ('ru', gettext('Russian')),
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+MODELTRANSLATION_LANGUAGES = ('uz', 'en', 'ru')
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('uz', 'en', 'ru')
+TRANSLATABLE_MODEL_MODULES = ['HomePage', ]
+# MODELTRANSLATION_ENABLE_FALLBACKS = False
+
+MODELTRANSLATION_TRANSLATION_FILES = (
+    'app.translation.translate',
+)
 
 
 # Static files (CSS, JavaScript, Images)
