@@ -44,6 +44,9 @@ def start(update: Update, context: CallbackContext):
                                  reply_markup=kb.channel(left_channel, user_lang))
         return state.check_channel
     user, _ = TGUsers.objects.get_or_create(chat_id=update.effective_user.id)
+    if context.user_data.get('user_lang_page', False):
+        pass
+    # ---------------------------------
     if not _:
         if not user.language:
             context.bot.send_message(chat_id=update.effective_user.id, text=msg_text.main.get(user_lang),
